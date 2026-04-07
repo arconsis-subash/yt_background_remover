@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YT Background Remover</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Background Remover</h1>
+      <p>Upload an image and get a high quality PNG with the background removed.</p>
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert">{{ messages[0] }}</div>
+      {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('remove_bg') }}" method="post" enctype="multipart/form-data">
+        <label class="file-input">
+          <span>Select image</span>
+          <input type="file" name="image" accept="image/*" required />
+        </label>
+        <button type="submit">Remove background</button>
+      </form>
+
+      <div class="note">
+        Supported formats: PNG, JPG, JPEG, WEBP, BMP, GIF, TIFF.
+      </div>
+    </div>
+  </body>
+</html>
